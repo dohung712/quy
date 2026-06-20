@@ -1,0 +1,25 @@
+{
+  "name": "Quỹ Nhóm - Thu Chi Team",
+  "short_name": "Quỹ Nhóm",
+  "description": "Quản lý thu chi nhóm — ghi nhận giao dịch, xem báo cáo theo thời gian thực",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#FAFAF9",
+  "theme_color": "#6366F1",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
