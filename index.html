@@ -89,6 +89,20 @@ body{font-family:var(--font-sans)}
 .form-label{font-size:11.5px;color:var(--text2);font-weight:500}
 .form-group input,.form-group select,.form-group textarea{font-size:13.5px;padding:9px 11px;border-radius:11px;border:0.5px solid var(--border);background:var(--bg);color:var(--text);width:100%}
 .form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:none;border-color:var(--accent)}
+@media (max-width:600px){
+  .form-group input,.form-group select,.form-group textarea{font-size:16px;padding:13px 12px;border-radius:12px}
+  .form-group select{background-position:right 10px center}
+  .type-btn{padding:13px;font-size:14px}
+  .qa-chip{padding:8px 13px;font-size:13px}
+  .submit-btn{padding:13px;font-size:15px}
+  .tab{padding:10px 0;font-size:12px}
+  .tab i{font-size:17px}
+  .tx-actions button{font-size:19px;padding:8px 7px}
+  .search-bar input{font-size:16px}
+  .pass-input input{font-size:16px;padding:12px}
+  .hero-value{font-size:30px}
+  .form-grid{gap:12px}
+}
 .form-group textarea{resize:vertical;min-height:60px}
 .type-toggle{display:flex;gap:6px}
 .type-btn{flex:1;padding:9px;border:0.5px solid var(--border);border-radius:11px;font-size:13px;font-weight:600;cursor:pointer;background:var(--bg);color:var(--text2);transition:.15s}
@@ -160,15 +174,54 @@ body{font-family:var(--font-sans)}
 .quick-amounts{display:flex;gap:6px;margin-top:6px;flex-wrap:wrap}
 .qa-chip{padding:5px 11px;border-radius:9px;border:0.5px solid var(--border);background:var(--bg3);color:var(--text2);font-size:11.5px;font-weight:600;cursor:pointer;transition:.15s}
 .qa-chip:active{transform:scale(.95);background:var(--accent-bg);color:var(--accent)}
+
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:80;display:none;align-items:flex-end;justify-content:center}
+.modal-overlay.open{display:flex}
+.modal-sheet{background:var(--bg2);width:100%;max-width:480px;border-radius:18px 18px 0 0;padding:18px 16px calc(18px + env(safe-area-inset-bottom,0px));max-height:80vh;overflow-y:auto;animation:sheetUp .25s ease}
+@keyframes sheetUp{from{transform:translateY(30px);opacity:0}to{transform:translateY(0);opacity:1}}
+.modal-title{font-size:15px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between}
+.modal-close{background:none;border:none;font-size:20px;color:var(--text2);cursor:pointer;padding:4px}
+.cat-row{display:flex;align-items:center;gap:8px;padding:10px 12px;background:var(--bg);border:0.5px solid var(--border);border-radius:11px;margin-bottom:7px}
+.cat-row span{flex:1;font-size:13.5px}
+.cat-row button{background:none;border:none;color:var(--chi);font-size:17px;cursor:pointer;padding:3px}
+.cat-add-row{display:flex;gap:8px;margin-top:10px}
+.cat-add-row input{flex:1}
+.cat-add-row button{padding:0 16px;border:none;border-radius:11px;background:var(--accent);color:#fff;font-weight:600;cursor:pointer}
+
+.login-overlay{position:fixed;inset:0;background:var(--bg);z-index:200;display:flex;align-items:center;justify-content:center;padding:24px}
+.login-overlay.hidden{display:none}
+.login-card{max-width:340px;width:100%;text-align:center}
+.login-icon{width:62px;height:62px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-size:28px;color:#fff;margin:0 auto 16px}
+.login-title{font-size:18px;font-weight:700;margin-bottom:6px;color:var(--text)}
+.login-desc{font-size:13px;color:var(--text2);margin-bottom:18px;line-height:1.6}
+.login-input{width:100%;font-size:18px;text-align:center;letter-spacing:.1em;padding:13px;border-radius:13px;border:1.5px solid var(--border);background:var(--bg2);color:var(--text);margin-bottom:10px;text-transform:lowercase}
+.login-input:focus{outline:none;border-color:var(--accent)}
+.login-btn{width:100%;padding:12px;border:none;border-radius:13px;background:var(--accent);color:#fff;font-size:14px;font-weight:600;cursor:pointer}
+.login-err{color:var(--chi);font-size:12.5px;margin-top:8px;min-height:16px}
+
+.user-chip{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--text2);background:var(--bg2);border:0.5px solid var(--border);border-radius:20px;padding:4px 10px 4px 6px;cursor:pointer}
+.user-chip .avatar{margin-right:0}
 </style>
 
 <h2 class="sr-only">Công cụ quản lý thu chi nhóm</h2>
 
 <div class="app" id="app-root">
+  <div class="login-overlay hidden" id="login-overlay">
+    <div class="login-card">
+      <div class="login-icon"><i class="ti ti-user-check" aria-hidden="true"></i></div>
+      <div class="login-title">Xác nhận người dùng</div>
+      <div class="login-desc">Nhập mã định danh (chữ cái đầu tên) để hệ thống ghi nhận ai cập nhật giao dịch.<br>VD: Đỗ Xuân Hùng → <b>dxh</b></div>
+      <input type="text" class="login-input" id="login-code-inp" placeholder="vd: dxh" maxlength="6" onkeydown="if(event.key==='Enter')doLogin()">
+      <button class="login-btn" onclick="doLogin()">Xác nhận</button>
+      <div class="login-err" id="login-err"></div>
+    </div>
+  </div>
+
   <div class="topbar">
     <div class="topbar-title"><i class="ti ti-wallet" aria-hidden="true"></i> Quỹ nhóm</div>
     <div style="display:flex;align-items:center;gap:10px">
       <span id="sync-badge" style="font-size:10.5px;color:var(--text3);display:flex;align-items:center;gap:4px"><i class="ti ti-cloud" aria-hidden="true"></i> Đang kết nối...</span>
+      <div class="user-chip" id="user-chip" onclick="showLogin(true)" style="display:none"></div>
       <button class="theme-toggle" id="theme-btn" onclick="toggleTheme()"><i class="ti ti-moon" id="theme-icon" aria-hidden="true"></i></button>
     </div>
   </div>
@@ -316,6 +369,15 @@ body{font-family:var(--font-sans)}
         </div>
 
         <div style="margin-top:16px">
+          <div class="section-title"><i class="ti ti-list-check" aria-hidden="true"></i>Quản lý giao dịch (sửa / xoá)</div>
+          <div class="search-bar">
+            <i class="ti ti-search" aria-hidden="true"></i>
+            <input type="text" id="ql-search" placeholder="Tìm giao dịch để sửa/xoá..." oninput="renderQlList()">
+          </div>
+          <div class="tx-list" id="ql-tx-list"></div>
+        </div>
+
+        <div style="margin-top:16px">
           <div class="section-title"><i class="ti ti-trophy" aria-hidden="true"></i>Top người chuyển vào (Thu)</div>
           <div class="tx-list" id="stat-nguoichuyen"></div>
         </div>
@@ -350,6 +412,17 @@ body{font-family:var(--font-sans)}
 
 <button class="fab" onclick="cancelEdit();switchTab('them-moi')" aria-label="Thêm giao dịch nhanh"><i class="ti ti-plus" aria-hidden="true"></i></button>
 
+<div class="modal-overlay" id="cat-modal">
+  <div class="modal-sheet">
+    <div class="modal-title">Chỉnh sửa danh mục <button class="modal-close" onclick="closeCatModal()"><i class="ti ti-x" aria-hidden="true"></i></button></div>
+    <div id="cat-list"></div>
+    <div class="cat-add-row">
+      <input type="text" id="cat-new-inp" placeholder="VD: 🎁 Quà tặng">
+      <button onclick="addCategory()">Thêm</button>
+    </div>
+  </div>
+</div>
+
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 <script>
@@ -377,25 +450,45 @@ let managerPass = DEFAULT_PASS;
 let editingId = null;
 
 const PERSONS = ['Nguyễn Thị Thy','Lê Văn Nhân','Trần Thị Huyền Trang','Lê Thị Thanh Trâm','Trần Minh Hải','Nguyễn Quỳnh Anh','Đỗ Nhật Trinh','Tạ Đức Hiếu','Trần Thị Mỹ Trang','Lê Thị Mỹ Linh','Đỗ Xuân Hùng','Lê Bàng Dinh','Oppo','Samsung','Xiaomi','Khác'];
-const CATEGORIES = ['🍽️ Ăn uống','🚗 Ship','📦 Văn phòng phẩm','🤝 Trang trí','📱 Hỗ trợ khách hàng','🏢 Văn phòng phẩm','📢 Marketing / Quảng cáo','🛒 POSM','💰 Khoán','💵 Thi đua','📋 Vệ Sinh','💵 Thu Khác','💵Chi Khác'];
+let CATEGORIES = ['🍽️ Ăn uống','🚗 Ship','📦 Văn phòng phẩm','🤝 Trang trí','📱 Hỗ trợ khách hàng','🏢 Văn phòng phẩm','📢 Marketing / Quảng cáo','🛒 POSM','💰 Khoán','💵 Thi đua','📋 Vệ Sinh','💵 Thu Khác','💵Chi Khác'];
 const PIE_COLORS = ['#2563EB','#0F9D6B','#D8552E','#9333EA','#EAB308','#0891B2','#DB2777','#65A30D','#7C3AED','#EA580C','#0D9488','#C026D3','#475569'];
 
 function populateSelects() {
   const dm = document.getElementById('inp-danhmuc');
+  const curDm = dm.value;
+  dm.innerHTML = '<option value="">-- Chọn --</option>';
   CATEGORIES.forEach(c => { const o = document.createElement('option'); o.textContent = c; dm.appendChild(o); });
+  if (CATEGORIES.includes(curDm)) dm.value = curDm;
   const ng = document.getElementById('inp-nguoi');
-  PERSONS.forEach(p => { const o = document.createElement('option'); o.textContent = p; ng.appendChild(o); });
+  if (!ng.dataset.filled) {
+    PERSONS.forEach(p => { const o = document.createElement('option'); o.textContent = p; ng.appendChild(o); });
+    ng.dataset.filled = '1';
+  }
 }
 populateSelects();
 
-// Load manager password from Firestore (shared across all users)
+// Load manager password + categories from Firestore (shared across all users)
 settingsRef.get().then(snap => {
   if (snap.exists && snap.data().pass) {
     managerPass = snap.data().pass;
   } else {
     settingsRef.set({ pass: DEFAULT_PASS }, { merge: true });
   }
+  if (snap.exists && Array.isArray(snap.data().categories) && snap.data().categories.length) {
+    CATEGORIES = snap.data().categories;
+  } else {
+    settingsRef.set({ categories: CATEGORIES }, { merge: true });
+  }
+  populateSelects();
 }).catch(e => console.error('settings load error', e));
+
+settingsRef.onSnapshot(snap => {
+  if (snap.exists && Array.isArray(snap.data().categories)) {
+    CATEGORIES = snap.data().categories;
+    populateSelects();
+    if (document.getElementById('cat-modal').classList.contains('open')) renderCatModalList();
+  }
+});
 
 // Real-time listener: every add/edit/delete from any device updates everyone instantly
 txCol.orderBy('createdAt', 'desc').onSnapshot(snap => {
@@ -479,6 +572,52 @@ function setAmount(v) {
   inp.value = (cur + v).toLocaleString('vi-VN');
 }
 
+// ---------- USER LOGIN (identify who updates) ----------
+const LOGIN_PERSONS = PERSONS.slice(0, 12); // chỉ nhân sự thật, không gồm Oppo/Samsung/Xiaomi/Khác
+let currentUser = null;
+function stripAccents(str) {
+  return str.normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/đ/g,'d').replace(/Đ/g,'D');
+}
+function nameCode(name) {
+  return stripAccents(name).split(' ').filter(Boolean).map(w => w[0]).join('').toLowerCase();
+}
+function updateUserChip() {
+  const chip = document.getElementById('user-chip');
+  if (!currentUser) { chip.style.display = 'none'; return; }
+  chip.style.display = 'flex';
+  chip.innerHTML = `${avatarHTML(currentUser)}<span>${currentUser}</span>`;
+}
+function showLogin(forceShow) {
+  document.getElementById('login-overlay').classList.remove('hidden');
+  document.getElementById('login-code-inp').value = '';
+  document.getElementById('login-err').textContent = '';
+  setTimeout(() => document.getElementById('login-code-inp').focus(), 50);
+}
+function doLogin() {
+  const v = document.getElementById('login-code-inp').value.trim().toLowerCase();
+  const match = LOGIN_PERSONS.find(p => nameCode(p) === v);
+  if (!match) {
+    document.getElementById('login-err').textContent = 'Mã không đúng, vui lòng kiểm tra lại.';
+    return;
+  }
+  currentUser = match;
+  try { localStorage.setItem('thuchi_user', match); } catch(e){}
+  document.getElementById('login-overlay').classList.add('hidden');
+  updateUserChip();
+  showToast('Xin chào, ' + match + '!');
+}
+(function initLogin(){
+  try {
+    const saved = localStorage.getItem('thuchi_user');
+    if (saved && LOGIN_PERSONS.includes(saved)) {
+      currentUser = saved;
+      updateUserChip();
+      return;
+    }
+  } catch(e){}
+  showLogin(true);
+})();
+
 function previewImages(inp) {
   const preview = document.getElementById('img-preview');
   preview.innerHTML = '';
@@ -504,12 +643,12 @@ function addTransaction() {
   err.textContent = '';
 
   if (editingId !== null) {
-    txCol.doc(editingId).update({ type: currentType, ten, sotien, ngay, danhmuc, nguoi, noidung })
+    txCol.doc(editingId).update({ type: currentType, ten, sotien, ngay, danhmuc, nguoi, noidung, nguoiCapNhat: currentUser || 'Không rõ' })
       .then(() => { showToast('Đã cập nhật giao dịch!'); })
       .catch(e => { console.error(e); showToast('Lỗi cập nhật, thử lại!'); });
     cancelEdit();
   } else {
-    txCol.add({ type: currentType, ten, sotien, ngay, danhmuc, nguoi, noidung, createdAt: firebase.firestore.FieldValue.serverTimestamp() })
+    txCol.add({ type: currentType, ten, sotien, ngay, danhmuc, nguoi, noidung, nguoiCapNhat: currentUser || 'Không rõ', createdAt: firebase.firestore.FieldValue.serverTimestamp() })
       .then(() => { showToast('Đã lưu giao dịch!'); })
       .catch(e => { console.error(e); showToast('Lỗi lưu, thử lại!'); });
   }
@@ -632,7 +771,7 @@ function txHTML(tx, withActions, swipable) {
     ${tx.danhmuc ? catIcon(tx.danhmuc) : `<div class="tx-dot ${tx.type}"></div>`}
     <div class="tx-info">
       <div class="tx-name">${tx.ten}</div>
-      <div class="tx-meta">${tx.ngay}${tx.danhmuc ? ' · ' + tx.danhmuc.replace(/^\S+\s/,'') : ''}${tx.nguoi ? ' · ' + avatarHTML(tx.nguoi) + tx.nguoi : ''}</div>
+      <div class="tx-meta">${tx.ngay}${tx.danhmuc ? ' · ' + tx.danhmuc.replace(/^\S+\s/,'') : ''}${tx.nguoi ? ' · ' + avatarHTML(tx.nguoi) + tx.nguoi : ''}${tx.nguoiCapNhat ? ' · <span style="opacity:.7">bởi ' + tx.nguoiCapNhat + '</span>' : ''}</div>
     </div>
     <span class="badge ${tx.type}">${tx.type === 'thu' ? 'Thu' : 'Chi'}</span>
     <div class="tx-amount ${tx.type}">${tx.type === 'chi' ? '-' : '+'}${fmt(tx.sotien)}</div>
@@ -807,7 +946,42 @@ function changePass() {
 }
 
 function editCategories() {
-  showToast('Tính năng đang phát triển – sẽ có ở bản đầy đủ!');
+  renderCatModalList();
+  document.getElementById('cat-modal').classList.add('open');
+}
+function closeCatModal() {
+  document.getElementById('cat-modal').classList.remove('open');
+}
+function renderCatModalList() {
+  const wrap = document.getElementById('cat-list');
+  wrap.innerHTML = CATEGORIES.map((c,i) => `<div class="cat-row"><span>${c}</span><button onclick="deleteCategory(${i})"><i class="ti ti-trash" aria-hidden="true"></i></button></div>`).join('');
+}
+function addCategory() {
+  const inp = document.getElementById('cat-new-inp');
+  const v = inp.value.trim();
+  if (!v) return;
+  if (CATEGORIES.includes(v)) { showToast('Danh mục đã tồn tại!'); return; }
+  CATEGORIES.push(v);
+  settingsRef.set({ categories: CATEGORIES }, { merge: true })
+    .then(() => { inp.value=''; renderCatModalList(); populateSelects(); showToast('Đã thêm danh mục!'); })
+    .catch(e => { console.error(e); showToast('Lỗi lưu danh mục!'); });
+}
+function deleteCategory(idx) {
+  if (!confirm('Xoá danh mục "' + CATEGORIES[idx] + '"?')) return;
+  CATEGORIES.splice(idx,1);
+  settingsRef.set({ categories: CATEGORIES }, { merge: true })
+    .then(() => { renderCatModalList(); populateSelects(); showToast('Đã xoá danh mục!'); })
+    .catch(e => { console.error(e); showToast('Lỗi xoá danh mục!'); });
+}
+
+function renderQlList() {
+  const wrap = document.getElementById('ql-tx-list');
+  if (!wrap) return;
+  const q = (document.getElementById('ql-search').value || '').trim().toLowerCase();
+  let data = transactions;
+  if (q) data = data.filter(t => (t.ten||'').toLowerCase().includes(q) || (t.noidung||'').toLowerCase().includes(q) || (t.nguoi||'').toLowerCase().includes(q));
+  data = data.slice(0, 40);
+  wrap.innerHTML = data.length ? data.map(tx => txHTML(tx, true, false)).join('') : '<div class="empty-state">Không tìm thấy giao dịch</div>';
 }
 
 function clearAll() {
@@ -839,6 +1013,7 @@ function topGroups(list, key) {
 }
 
 function renderStats() {
+  renderQlList();
   const thuList = transactions.filter(t => t.type === 'thu');
   const chiList = transactions.filter(t => t.type === 'chi');
 
