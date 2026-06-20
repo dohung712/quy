@@ -2,7 +2,7 @@
 <!-- ============ PWA: cài vào màn hình chính, full màn hình ============ -->
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#6366F1">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Quỹ Nhóm">
@@ -14,7 +14,7 @@ body{font-family:var(--font-sans);-webkit-tap-highlight-color:transparent;oversc
 html,body{height:100%}
 
 .app{
-  max-width:480px;margin:0 auto;padding:.75rem .25rem 1.5rem;
+  max-width:600px;margin:0 auto;padding:.75rem .25rem 1.5rem;
   --bg:#FAFAF9;--bg2:#FFFFFF;--bg3:#F1F0FB;--border:#E7E5F0;
   --text:#1A1A23;--text2:#6B6B78;--text3:#A3A2AE;
   --thu:#0F9D6B;--thu-bg:#E3F6EC;--thu-bg2:#D2F0E0;
@@ -34,7 +34,8 @@ html,body{height:100%}
 }
 .app{background:var(--bg);border-radius:18px;padding-left:.85rem;padding-right:.85rem;padding-top:.85rem}
 @media (max-width:600px){
-  .app{max-width:100%;border-radius:0;padding-left:.7rem;padding-right:.7rem;min-height:100vh;font-size:15px}
+  .app{max-width:100%;width:100%;border-radius:0;padding-left:1rem;padding-right:1rem;min-height:100vh;font-size:16px}
+  body{font-size:16px}
 }
 @media (display-mode:standalone){
   .app{padding-top:calc(.85rem + env(safe-area-inset-top,0px))}
@@ -42,14 +43,14 @@ html,body{height:100%}
 }
 
 .topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:.85rem}
-.topbar-title{font-size:16px;font-weight:600;color:var(--text);display:flex;align-items:center;gap:8px}
-.topbar-title i{color:var(--accent);font-size:19px}
+.topbar-title{font-size:18px;font-weight:700;color:var(--text);display:flex;align-items:center;gap:8px}
+.topbar-title i{color:var(--accent);font-size:22px}
 .theme-toggle{width:34px;height:34px;border-radius:50%;border:0.5px solid var(--border);background:var(--bg2);color:var(--text2);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;transition:.15s}
 .theme-toggle:active{transform:scale(.92)}
 
-.tab-bar{display:flex;gap:3px;background:var(--bg3);border-radius:14px;padding:4px;margin-bottom:1.1rem}
-.tab{flex:1;padding:9px 0;border:none;background:transparent;border-radius:11px;font-size:12px;font-weight:500;color:var(--text2);cursor:pointer;transition:.18s;display:flex;flex-direction:column;align-items:center;gap:3px}
-.tab i{font-size:18px}
+.tab-bar{display:flex;gap:3px;background:var(--bg3);border-radius:16px;padding:5px;margin-bottom:1.2rem}
+.tab{flex:1;padding:10px 0;border:none;background:transparent;border-radius:12px;font-size:13px;font-weight:600;color:var(--text2);cursor:pointer;transition:.18s;display:flex;flex-direction:column;align-items:center;gap:3px}
+.tab i{font-size:20px}
 .tab.active{background:var(--bg2);color:var(--text);box-shadow:var(--shadow)}
 
 .screen{display:none;opacity:0;transform:translateY(8px)}
@@ -57,25 +58,25 @@ html,body{height:100%}
 @keyframes screenIn{to{opacity:1;transform:translateY(0)}}
 
 .summary-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-bottom:1.25rem}
-.stat-card{background:var(--bg2);border:0.5px solid var(--border);border-radius:14px;padding:12px 10px;box-shadow:var(--shadow)}
-.stat-label{font-size:11px;color:var(--text2);margin-bottom:5px;display:flex;align-items:center;gap:4px}
-.stat-value{font-size:15px;font-weight:700;color:var(--text);letter-spacing:-.2px}
+.stat-card{background:var(--bg2);border:0.5px solid var(--border);border-radius:16px;padding:14px 12px;box-shadow:var(--shadow)}
+.stat-label{font-size:12px;color:var(--text2);margin-bottom:6px;display:flex;align-items:center;gap:4px}
+.stat-value{font-size:16px;font-weight:700;color:var(--text);letter-spacing:-.3px}
 .stat-value.thu{color:var(--thu)}.stat-value.chi{color:var(--chi)}.stat-value.du{color:var(--accent)}
 
-.section-title{font-size:12px;font-weight:600;color:var(--text2);margin-bottom:10px;text-transform:uppercase;letter-spacing:.06em;display:flex;align-items:center;gap:6px}
+.section-title{font-size:13px;font-weight:700;color:var(--text2);margin-bottom:12px;text-transform:uppercase;letter-spacing:.06em;display:flex;align-items:center;gap:6px}
 
 .tx-list{display:flex;flex-direction:column;gap:7px;margin-bottom:1.25rem}
-.tx-item{background:var(--bg2);border:0.5px solid var(--border);border-radius:13px;padding:13px 13px;display:flex;align-items:center;gap:10px;box-shadow:var(--shadow);animation:rowIn .25s ease}
+.tx-item{background:var(--bg2);border:0.5px solid var(--border);border-radius:16px;padding:15px 14px;display:flex;align-items:center;gap:12px;box-shadow:var(--shadow);animation:rowIn .25s ease}
 @keyframes rowIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
 .tx-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
 .tx-dot.thu{background:var(--thu)}.tx-dot.chi{background:var(--chi)}
 .tx-info{flex:1;min-width:0}
-.tx-name{font-size:14.5px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.tx-meta{font-size:12.5px;color:var(--text2);margin-top:3px}
-.tx-amount{font-size:14.5px;font-weight:600;flex-shrink:0}
+.tx-name{font-size:15.5px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tx-meta{font-size:13px;color:var(--text2);margin-top:4px}
+.tx-amount{font-size:16px;font-weight:700;flex-shrink:0}
 .tx-amount.thu{color:var(--thu)}.tx-amount.chi{color:var(--chi)}
-.tx-actions{display:flex;align-items:center;gap:4px;flex-shrink:0}
-.tx-actions button{background:var(--bg3);border:0.5px solid var(--border);cursor:pointer;font-size:15px;padding:7px 9px;border-radius:10px;color:var(--text2);transition:.15s;min-width:36px;min-height:36px;display:flex;align-items:center;justify-content:center}
+.tx-actions{display:flex;align-items:center;gap:6px;flex-shrink:0}
+.tx-actions button{background:var(--bg3);border:0.5px solid var(--border);cursor:pointer;font-size:18px;padding:9px 11px;border-radius:12px;color:var(--text2);transition:.15s;min-width:44px;min-height:44px;display:flex;align-items:center;justify-content:center}
 .tx-actions button:active{background:var(--bg3)}
 .tx-actions button.edit:hover{color:var(--accent)}
 .tx-actions button.del:hover{color:var(--chi)}
@@ -93,36 +94,44 @@ html,body{height:100%}
 .pie-legend-name{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--text)}
 .pie-legend-pct{font-weight:600;color:var(--text);flex-shrink:0}
 
-.add-btn{width:100%;padding:11px;background:var(--accent-bg);color:var(--accent);border:none;border-radius:13px;font-size:14px;font-weight:600;cursor:pointer;margin-bottom:1.25rem;display:flex;align-items:center;justify-content:center;gap:6px;transition:.15s}
+.add-btn{width:100%;padding:14px;background:var(--accent-bg);color:var(--accent);border:none;border-radius:14px;font-size:16px;font-weight:700;cursor:pointer;margin-bottom:1.25rem;display:flex;align-items:center;justify-content:center;gap:8px;transition:.15s}
 .add-btn:active{transform:scale(.98)}
 .form-card{background:var(--bg2);border:0.5px solid var(--border);border-radius:16px;padding:16px;margin-bottom:1.25rem;display:none;box-shadow:var(--shadow)}
 .form-card.open{display:block;animation:screenIn .25s ease}
 .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
 .form-group{display:flex;flex-direction:column;gap:5px}
 .form-group.full{grid-column:1/-1}
-.form-label{font-size:11.5px;color:var(--text2);font-weight:500}
-.form-group input,.form-group select,.form-group textarea{font-size:13.5px;padding:9px 11px;border-radius:11px;border:0.5px solid var(--border);background:var(--bg);color:var(--text);width:100%}
+.form-label{font-size:13px;color:var(--text2);font-weight:600}
+.form-group input,.form-group select,.form-group textarea{font-size:16px;padding:13px 14px;border-radius:13px;border:0.5px solid var(--border);background:var(--bg);color:var(--text);width:100%}
 .form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:none;border-color:var(--accent)}
 @media (max-width:600px){
-  .form-group input,.form-group select,.form-group textarea{font-size:16px;padding:13px 12px;border-radius:12px}
-  .form-group select{background-position:right 10px center}
-  .type-btn{padding:13px;font-size:14px}
-  .qa-chip{padding:8px 13px;font-size:13px}
-  .submit-btn{padding:15px;font-size:16px}
-  .tab{padding:11px 0;font-size:12px}
-  .tab i{font-size:19px}
-  .tx-actions button{font-size:22px;padding:10px 10px;min-width:44px;min-height:44px}
+  .form-group input,.form-group select,.form-group textarea{font-size:16px;padding:15px 14px;border-radius:13px}
+  .form-group select{background-position:right 12px center}
+  .type-btn{padding:15px;font-size:16px}
+  .qa-chip{padding:10px 15px;font-size:14px}
+  .submit-btn{padding:17px;font-size:17px}
+  .tab{padding:12px 0;font-size:13px}
+  .tab i{font-size:21px}
+  .tx-actions button{font-size:20px;padding:10px 12px;min-width:46px;min-height:46px}
   .search-bar input{font-size:16px}
-  .pass-input input{font-size:16px;padding:12px}
-  .hero-value{font-size:30px}
-  .form-grid{gap:12px}
+  .pass-input input{font-size:16px;padding:14px}
+  .hero-value{font-size:36px}
+  .form-grid{gap:14px}
 }
 .form-group textarea{resize:vertical;min-height:60px}
 .type-toggle{display:flex;gap:6px}
-.type-btn{flex:1;padding:9px;border:0.5px solid var(--border);border-radius:11px;font-size:13px;font-weight:600;cursor:pointer;background:var(--bg);color:var(--text2);transition:.15s}
-.type-btn.active.thu{background:var(--thu-bg);color:var(--thu);border-color:var(--thu)}
-.type-btn.active.chi{background:var(--chi-bg);color:var(--chi);border-color:var(--chi)}
-.submit-btn{width:100%;padding:10px;border:none;border-radius:12px;font-size:14px;font-weight:600;cursor:pointer;background:var(--accent);color:#fff;transition:.15s}
+.type-btn{flex:1;padding:15px 10px;border:2px solid var(--border);border-radius:14px;font-size:16px;font-weight:700;cursor:pointer;background:var(--bg);color:var(--text2);transition:all .18s ease;letter-spacing:.01em}
+.type-btn.active.thu{
+  background:var(--thu);color:#fff;border-color:var(--thu);
+  box-shadow:0 4px 14px -3px rgba(16,185,129,.5);
+  transform:scale(1.03);
+}
+.type-btn.active.chi{
+  background:var(--chi);color:#fff;border-color:var(--chi);
+  box-shadow:0 4px 14px -3px rgba(239,68,68,.5);
+  transform:scale(1.03);
+}
+.submit-btn{width:100%;padding:16px;border:none;border-radius:14px;font-size:17px;font-weight:700;cursor:pointer;background:var(--accent);color:#fff;transition:.15s}
 .submit-btn:active{transform:scale(.98)}
 .cancel-edit-btn{width:100%;padding:9px;border:0.5px solid var(--border);border-radius:12px;font-size:13px;font-weight:500;cursor:pointer;background:transparent;color:var(--text2);margin-top:8px}
 .edit-banner{background:var(--accent-bg);color:var(--accent);font-size:12px;font-weight:500;padding:8px 12px;border-radius:10px;margin-bottom:12px;display:flex;align-items:center;gap:6px}
@@ -147,7 +156,7 @@ html,body{height:100%}
 .ql-btn i{font-size:16px;color:var(--text2)}
 .ql-btn.danger{color:var(--chi);border-color:var(--chi-bg2)}
 .ql-btn.danger i{color:var(--chi)}
-.badge{font-size:10px;padding:3px 8px;border-radius:20px;font-weight:600}
+.badge{font-size:12px;padding:4px 10px;border-radius:20px;font-weight:700}
 .badge.thu{background:var(--thu-bg);color:var(--thu)}.badge.chi{background:var(--chi-bg);color:var(--chi)}
 .gh-box{background:var(--bg3);border-radius:12px;padding:12px 14px;font-size:12.5px;color:var(--text2);margin-bottom:10px;line-height:1.7}
 .gh-box code{font-family:var(--font-mono);font-size:11.5px;background:var(--bg);padding:2px 6px;border-radius:5px;color:var(--text)}
@@ -163,14 +172,14 @@ html,body{height:100%}
 .skeleton{background:linear-gradient(90deg,var(--bg3) 25%,var(--border) 37%,var(--bg3) 63%);background-size:400% 100%;animation:skeletonShine 1.4s ease infinite;border-radius:10px}
 @keyframes skeletonShine{0%{background-position:100% 50%}100%{background-position:0 50%}}
 .skel-row{height:54px;border-radius:13px;margin-bottom:7px}
-.hero-card{background:linear-gradient(135deg,var(--accent) 0%,var(--accent2) 100%);border-radius:18px;padding:18px 18px 16px;margin-bottom:10px;color:#fff;box-shadow:0 8px 22px -8px rgba(99,102,241,.55);position:relative;overflow:hidden}
+.hero-card{background:linear-gradient(135deg,var(--accent) 0%,var(--accent2) 100%);border-radius:20px;padding:22px 20px 18px;margin-bottom:12px;color:#fff;box-shadow:0 8px 22px -8px rgba(99,102,241,.55);position:relative;overflow:hidden}
 .hero-card::after{content:'';position:absolute;right:-30px;top:-30px;width:130px;height:130px;border-radius:50%;background:rgba(255,255,255,.08)}
-.hero-label{font-size:11.5px;opacity:.85;display:flex;align-items:center;gap:5px;margin-bottom:6px}
-.hero-value{font-size:28px;font-weight:700;letter-spacing:-.5px;margin-bottom:14px}
+.hero-label{font-size:13px;opacity:.85;display:flex;align-items:center;gap:5px;margin-bottom:8px}
+.hero-value{font-size:34px;font-weight:700;letter-spacing:-.5px;margin-bottom:16px}
 .hero-sub{display:flex;gap:10px}
 .hero-pill{flex:1;background:rgba(255,255,255,.16);backdrop-filter:blur(2px);border-radius:12px;padding:9px 11px}
-.hero-pill-label{font-size:10.5px;opacity:.85;display:flex;align-items:center;gap:4px;margin-bottom:3px}
-.hero-pill-value{font-size:14.5px;font-weight:700}
+.hero-pill-label{font-size:12px;opacity:.85;display:flex;align-items:center;gap:4px;margin-bottom:4px}
+.hero-pill-value{font-size:17px;font-weight:700}
 
 .cat-icon{width:30px;height:30px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
 .avatar{width:22px;height:22px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:9.5px;font-weight:700;color:#fff;flex-shrink:0;vertical-align:middle;margin-right:4px}
@@ -253,6 +262,36 @@ html,body{height:100%}
 
 <div class="app" id="app-root">
 
+
+  <!-- CONFIRM MODAL -->
+  <div class="admin-auth-modal" id="confirm-modal">
+    <div class="admin-auth-card" style="max-width:360px">
+      <div style="font-size:36px;margin-bottom:10px" id="confirm-icon">💰</div>
+      <div class="admin-auth-title" style="font-size:17px;margin-bottom:14px">Xác nhận giao dịch</div>
+      <div id="confirm-summary" style="background:var(--bg);border-radius:14px;padding:16px;margin-bottom:18px;text-align:left;border:0.5px solid var(--border)">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+          <span style="color:var(--text2);font-size:13px">Tên giao dịch</span>
+          <span style="font-weight:700;font-size:15px;color:var(--text)" id="cf-ten">—</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+          <span style="color:var(--text2);font-size:13px">Loại</span>
+          <span id="cf-loai" style="font-weight:700;font-size:15px"></span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+          <span style="color:var(--text2);font-size:13px">Số tiền</span>
+          <span id="cf-sotien" style="font-weight:800;font-size:18px"></span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <span style="color:var(--text2);font-size:13px">Người</span>
+          <span id="cf-nguoi" style="font-weight:600;font-size:13px;color:var(--text)">—</span>
+        </div>
+      </div>
+      <div class="admin-auth-btns" style="gap:10px">
+        <button class="admin-auth-cancel" onclick="closeConfirmModal()" style="font-size:15px;padding:13px">✏️ Sửa lại</button>
+        <button class="admin-auth-ok" onclick="doSaveTransaction()" style="font-size:15px;padding:13px">✅ Xác nhận</button>
+      </div>
+    </div>
+  </div>
   <!-- ADMIN AUTH MODAL -->
   <div class="admin-auth-modal" id="admin-auth-modal">
     <div class="admin-auth-card">
@@ -341,8 +380,8 @@ html,body{height:100%}
       <div style="margin-bottom:12px">
         <div class="form-label" style="margin-bottom:6px">Loại giao dịch</div>
         <div class="type-toggle">
-          <button class="type-btn active thu" id="btn-thu" onclick="setType('thu')"><i class="ti ti-arrow-down-circle" aria-hidden="true"></i> Thu</button>
-          <button class="type-btn chi" id="btn-chi" onclick="setType('chi')"><i class="ti ti-arrow-up-circle" aria-hidden="true"></i> Chi</button>
+          <button class="type-btn active thu" id="btn-thu" onclick="setType('thu')"><i class="ti ti-arrow-down-circle" aria-hidden="true"></i> 💰 Thu</button>
+          <button class="type-btn chi" id="btn-chi" onclick="setType('chi')"><i class="ti ti-arrow-up-circle" aria-hidden="true"></i> 💸 Chi</button>
         </div>
       </div>
       <div class="form-grid">
@@ -392,7 +431,7 @@ html,body{height:100%}
         </div>
       </div>
       <div class="err-msg" id="form-err"></div>
-      <button class="submit-btn" id="submit-btn" onclick="addTransaction()"><i class="ti ti-check" aria-hidden="true"></i> Lưu giao dịch</button>
+      <button class="submit-btn" id="submit-btn" onclick="showConfirmModal()"><i class="ti ti-check" aria-hidden="true"></i> Lưu giao dịch</button>
       <button class="cancel-edit-btn" id="cancel-edit-btn" style="display:none" onclick="cancelEdit()">Huỷ chỉnh sửa</button>
     </div>
   </div>
@@ -530,6 +569,10 @@ function populateSelects() {
     PERSONS.forEach(p => { const o = document.createElement('option'); o.textContent = p; ng.appendChild(o); });
     ng.dataset.filled = '1';
   }
+  // Tự chọn người đăng nhập nếu đã login
+  if (currentUser && ng.querySelector('option[value="' + currentUser + '"], option:not([value])')) {
+    autoFillNguoi(currentUser);
+  }
 }
 populateSelects();
 
@@ -624,6 +667,22 @@ function switchTab(id) {
   if (id === 'quan-ly' && qlUnlocked) renderStats();
 }
 
+function autoFillNguoi(name) {
+  const ng = document.getElementById('inp-nguoi');
+  if (!ng) return;
+  // Đảm bảo options đã được điền
+  if (!ng.dataset.filled) {
+    PERSONS.forEach(p => { const o = document.createElement('option'); o.textContent = p; ng.appendChild(o); });
+    ng.dataset.filled = '1';
+  }
+  for (let i = 0; i < ng.options.length; i++) {
+    if (ng.options[i].text === name || ng.options[i].value === name) {
+      ng.selectedIndex = i;
+      break;
+    }
+  }
+}
+
 function setType(t) {
   currentType = t;
   document.getElementById('btn-thu').className = 'type-btn' + (t==='thu' ? ' active thu' : '');
@@ -681,6 +740,8 @@ function doLogin() {
   try { localStorage.setItem('thuchi_user', match); } catch(e){}
   document.getElementById('login-overlay').classList.add('hidden');
   updateUserChip();
+  // Tự điền tên người đăng nhập vào ô Nhân viên
+  autoFillNguoi(match);
   showToast('Xin chào, ' + match + '!');
 }
 (function initLogin(){
@@ -689,6 +750,8 @@ function doLogin() {
     if (saved && LOGIN_PERSONS.includes(saved)) {
       currentUser = saved;
       updateUserChip();
+      // Tự điền tên vào form sau khi restore session
+      setTimeout(() => autoFillNguoi(saved), 200);
       return;
     }
   } catch(e){}
@@ -740,21 +803,26 @@ function addTransaction() {
     cancelEdit();
   } else {
     txCol.add({ type: currentType, ten, sotien, ngay, danhmuc, nguoi, noidung, nguoiCapNhat: currentUser || 'Không rõ', createdAt: firebase.firestore.FieldValue.serverTimestamp() })
-      .then(() => { haptic(12); showToast('Đã lưu giao dịch!'); })
+      .then(() => {
+        haptic(20);
+        showToast((currentType === 'thu' ? '💰 Đã lưu khoản Thu!' : '💸 Đã lưu khoản Chi!'));
+      })
       .catch(e => { console.error(e); showToast('Lỗi lưu, thử lại!'); });
   }
   resetForm();
-  switchTab('tong-quan');
+  switchTab('lich-su');
 }
 
 function resetForm() {
   document.getElementById('inp-ten').value = '';
   document.getElementById('inp-sotien').value = '';
   document.getElementById('inp-noidung').value = '';
-  document.getElementById('inp-nguoi').value = '';
   document.getElementById('inp-danhmuc').value = '';
-  document.getElementById('img-preview').innerHTML = '';
   document.getElementById('inp-ngay').value = new Date().toISOString().slice(0,10);
+  try { document.getElementById('img-preview').innerHTML = ''; } catch(e){}
+  // Tự điền lại tên người đăng nhập sau khi reset
+  if (currentUser) autoFillNguoi(currentUser);
+  else document.getElementById('inp-nguoi').value = '';
 }
 
 function editTx(id) {
@@ -1151,6 +1219,42 @@ function renderStats() {
   renderHistory();
 }
 
+
+
+// ─── CONFIRM MODAL ─────────────────────────────────────────
+function showConfirmModal() {
+  const ten = document.getElementById('inp-ten').value.trim();
+  const sotien = rawAmount(document.getElementById('inp-sotien').value);
+  const nguoi = document.getElementById('inp-nguoi').value.trim();
+  const err = document.getElementById('form-err');
+
+  if (!ten) { err.textContent = 'Vui lòng nhập tên giao dịch.'; return; }
+  if (!sotien || sotien <= 0) { err.textContent = 'Vui lòng nhập số tiền hợp lệ.'; return; }
+  err.textContent = '';
+
+  // Điền thông tin vào modal
+  const isThu = currentType === 'thu';
+  document.getElementById('confirm-icon').textContent = isThu ? '💰' : '💸';
+  document.getElementById('cf-ten').textContent = ten;
+  document.getElementById('cf-loai').innerHTML = isThu
+    ? '<span style="color:var(--thu);background:var(--thu-bg);padding:3px 12px;border-radius:20px">💰 Thu</span>'
+    : '<span style="color:var(--chi);background:var(--chi-bg);padding:3px 12px;border-radius:20px">💸 Chi</span>';
+  document.getElementById('cf-sotien').textContent = (isThu ? '+' : '-') + fmt(sotien) + ' ₫';
+  document.getElementById('cf-sotien').style.color = isThu ? 'var(--thu)' : 'var(--chi)';
+  document.getElementById('cf-nguoi').textContent = nguoi || '—';
+
+  document.getElementById('confirm-modal').classList.add('open');
+  haptic(6);
+}
+
+function closeConfirmModal() {
+  document.getElementById('confirm-modal').classList.remove('open');
+}
+
+function doSaveTransaction() {
+  document.getElementById('confirm-modal').classList.remove('open');
+  addTransaction();
+}
 
 // ---------- ADMIN ACTION: Xác thực trước khi Sửa/Xóa ----------
 let _pendingAction = null; // { type: 'edit'|'del', id }
