@@ -553,6 +553,7 @@ let filterMode = 'all';
 let transactions = [];
 let managerPass = DEFAULT_PASS;
 let editingId = null;
+let currentUser = null; // di chuyển lên đầu để tránh lỗi "Cannot access before initialization"
 
 const PERSONS = ['Nguyễn Thị Thy','Lê Văn Nhân','Trần Thị Huyền Trang','Lê Thị Thanh Trâm','Trần Minh Hải','Nguyễn Quỳnh Anh','Đỗ Nhật Trinh','Tạ Đức Hiếu','Trần Thị Mỹ Trang','Lê Thị Mỹ Linh','Đỗ Xuân Hùng','Lê Bàng Dinh','Oppo','Samsung','Xiaomi','Khác'];
 let CATEGORIES = ['🍽️ Ăn uống','🚗 Ship','📦 Văn phòng phẩm','🤝 Trang trí','📱 Hỗ trợ khách hàng','🏢 Văn phòng phẩm','📢 Marketing / Quảng cáo','🛒 POSM','💰 Khoán','💵 Thi đua','📋 Vệ Sinh','💵 Thu Khác','💵Chi Khác'];
@@ -705,7 +706,6 @@ function setAmount(v) {
 
 // ---------- USER LOGIN (identify who updates) ----------
 const LOGIN_PERSONS = PERSONS.slice(0, 12); // chỉ nhân sự thật, không gồm Oppo/Samsung/Xiaomi/Khác
-let currentUser = null;
 function stripAccents(str) {
   // QUAN TRỌNG: xử lý đ/Đ TRƯỚC khi normalize, vì Đ là 1 ký tự Unicode riêng
   // (không phải D+dấu), nếu normalize trước thì kết quả tách dấu không ổn định
